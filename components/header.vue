@@ -20,18 +20,80 @@
           国内机票
         </nuxt-link>
       </el-row>
-      <el-row type="flex" class="login">
-        <nuxt-link to="user/login">
+
+      <!-- 消息 -->
+      <el-dropdown class="message">
+        <span class="el-dropdown-link">
+          <i class="el-icon-bell" />
+          消息<i class="el-icon-arrow-down el-icon--right" />
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>消息</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+
+      <!-- 判断token -->
+      <el-row v-if="!$store.state.user.userInfo.token" type="flex" class="login">
+        <nuxt-link to="/user/login">
           登陆 / 注册
         </nuxt-link>
       </el-row>
+
+      <!-- 用户头像 -->
+      <div v-else>
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            <img :src="` ${$axios.defaults.baseURL}${$store.state.user.userInfo.user.defaultAvatar} `" class="userImg">
+            <span>{{ $store.state.user.userInfo.user.nickname }}</span>
+            <i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item @click.native="userOut">
+              退出
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </el-row>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data () {
+    return {
+
+    }
+  },
+  mounted () {
+    // console.log(this.$store.state.user)
+  },
+  methods: {
+    userOut () {
+      // 退出调用清除方法
+      this.$store.commit('user/clearUserInfo')
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
+.message {
+  margin-right: 20px;
+}
+.el-dropdown-link {
+  cursor: pointer;
+}
+.userImg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  vertical-align: middle;
+    border:2px solid #fff;
+  box-sizing: border-box;
+  &:hover {
+    border:2px solid #409eff
+  }
+}
 .header {
   height: 60px;
   line-height: 60px;
