@@ -142,6 +142,12 @@ export default {
             url: '/accounts/register',
             method: 'POST',
             data: formdata
+          }).then((res) => {
+            this.$message.success('注册成功，正在跳转')
+            setTimeout(() => {
+              this.$store.commit('user/setUserInfo', res.data)
+              this.$router.push('/')
+            }, 1000)
           })
         }
       })

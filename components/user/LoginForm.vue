@@ -79,7 +79,11 @@ export default {
             data: this.form
           }).then((res) => {
             //   调用mutation上的方法
-            this.$store.commit('user/setUserInfo', res.data)
+            this.$message.success('登陆成功，正在跳转')
+            setTimeout(() => {
+              this.$store.commit('user/setUserInfo', res.data)
+              this.$router.replace('/')
+            }, 1000)
           })
         } else {
           this.$message.warning('请输入必填项')
