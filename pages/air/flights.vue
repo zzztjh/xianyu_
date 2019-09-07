@@ -9,13 +9,13 @@
         <!-- 航班头部布局 -->
         <FlightsListHead />
         <!-- 航班信息 -->
-        <flights-item v-for="(item,index) in flightsData.flights" :key="index" :data="item" />
+        <flights-item v-for="(item,index) in dataList" :key="index" :data="item" />
         <el-pagination
-          :current-page="1"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :current-page="pageIndex"
+          :page-sizes="[5,10,15,20]"
+          :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
+          :total="flightsData.total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -39,6 +39,12 @@ export default {
   },
   data () {
     return {
+      // 当前页
+      pageIndex: 0,
+      //   显示条数
+      pageSize: 5,
+      // 总页数
+      total: 10,
       // 航班总数据
       flightsData: {},
       //   航班分页显示数据
@@ -51,19 +57,24 @@ export default {
   },
   methods: {
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+    //   console.log(`每页 ${val} 条`)
+      this.pageSize = val
+      this.dataList = this.flightsData.flights.slice(0, this.pageSize)
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+    //   console.log(`当前页: ${val}`)
+      this.pageIndex = val
+      this.dataList = this.flightsData.flights.slice((this.pageIndex - 1) * this.pageSize, this.pageSize * this.pageIndex)
     },
     getFlightsData () {
       this.$axios({
         url: 'airs',
         params: this.$route.query
       }).then((res) => {
-        console.log(res)
+        // console.log(res)
         this.flightsData = res.data
-        console.log(this.flightsData)
+        this.dataList = this.flightsData.flights.slice(0, this.pageSize)
+        // console.log(this.flightsData)
       })
     }
   }
