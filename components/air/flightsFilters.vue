@@ -87,17 +87,30 @@ export default {
   methods: {
     // 选择机场时候触发
     handleAirport (value) {
-
+    //   console.log(value)
+      const arr = this.data.flights.filter((v) => {
+        return v.org_airport_name === value
+      })
+      //   console.log(arr, 1111111111)
+      this.$emit('setFlightsData', arr)
     },
 
     // 选择出发时间时候触发
     handleFlightTimes (value) {
+    //   console.log(value)
+      const [from, to] = value.split(',')
+      const arr = this.data.flights.filter((v) => {
+        // 出发时间小时
+        const start = +v.dep_time.split(':')[0]
+        return +start >= +from && +start < +to
+      })
 
+      this.$emit('setFlightsData', arr)
     },
 
     // 选择航空公司时候触发
     handleCompany (value) {
-    //   console.log(this.data)
+    //   console.log(value)
       const arr = this.data.flights.filter((v) => {
         return v.airline_name === value
       })
@@ -107,7 +120,11 @@ export default {
 
     // 选择机型时候触发
     handleAirSize (value) {
-
+      const arr = this.data.flights.filter((v) => {
+        return v.plane_size === value
+      })
+      //   console.log(arr)
+      this.$emit('setFlightsData', arr)
     },
 
     // 撤销条件时候触发

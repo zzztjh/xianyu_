@@ -76,18 +76,20 @@ export default {
       // 展示数据
       this.dataList = this.flightsData.flights.slice((this.pageIndex - 1) * this.pageSize, this.pageSize * this.pageIndex)
       // 修改当前总数居
-      this.total = this.dataList.length
+      // console.log(this.dataList, 111111)
+      this.total = this.flightsData.flights.length
     },
     handleSizeChange (val) {
     //   console.log(`每页 ${val} 条`)
       this.pageSize = val
       this.dataList = this.flightsData.flights.slice(0, this.pageSize)
+      // this.total = this.dataList.length
     },
     handleCurrentChange (val) {
     //   console.log(`当前页: ${val}`)
       this.pageIndex = val
       this.dataList = this.flightsData.flights.slice((this.pageIndex - 1) * this.pageSize, this.pageSize * this.pageIndex)
-      this.total = this.dataList.length
+      // this.total = this.dataList.length
     },
     getFlightsData () {
       this.$axios({
