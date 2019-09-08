@@ -4,6 +4,7 @@
       <!-- 顶部过滤列表 -->
       <div class="flights-content">
         <!-- 过滤条件 -->
+        <FlightsFilters :data="cacheFlightsData" @setFlightsData="setFlightsData" />
         <div />
 
         <!-- 航班头部布局 -->
@@ -15,7 +16,7 @@
           :page-sizes="[5,10,15,20]"
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="flightsData.total"
+          :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -32,13 +33,20 @@
 <script>
 import FlightsListHead from '@/components/air/flightsListHead'
 import FlightsItem from '@/components/air/flightsItem.vue'
+import FlightsFilters from '@/components/air/flightsFilters.vue'
 
 export default {
   components: {
-    FlightsListHead, FlightsItem
+    FlightsListHead, FlightsItem, FlightsFilters
   },
   data () {
     return {
+      // 备用一份总数据   用来实现筛选功能
+      cacheFlightsData: {
+        info: {},
+        flights: [],
+        options: {}
+      },
       // 当前页
       pageIndex: 0,
       //   显示条数
@@ -46,7 +54,11 @@ export default {
       // 总页数
       total: 10,
       // 航班总数据
-      flightsData: {},
+      flightsData: {
+        info: {},
+        flights: [],
+        options: {}
+      },
       //   航班分页显示数据
       dataList: []
     }
@@ -56,6 +68,16 @@ export default {
     // console.dir(this.flightsData, 1111)
   },
   methods: {
+    setFlightsData (arr) {
+      // 赋值筛选条件的数组
+      // console.log(arr, 111)
+      this.flightsData.flights = arr
+      this.pageIndex = 1
+      // 展示数据
+      this.dataList = this.flightsData.flights.slice((this.pageIndex - 1) * this.pageSize, this.pageSize * this.pageIndex)
+      // 修改当前总数居
+      this.total = this.dataList.length
+    },
     handleSizeChange (val) {
     //   console.log(`每页 ${val} 条`)
       this.pageSize = val
@@ -65,6 +87,7 @@ export default {
     //   console.log(`当前页: ${val}`)
       this.pageIndex = val
       this.dataList = this.flightsData.flights.slice((this.pageIndex - 1) * this.pageSize, this.pageSize * this.pageIndex)
+      this.total = this.dataList.length
     },
     getFlightsData () {
       this.$axios({
@@ -73,6 +96,9 @@ export default {
       }).then((res) => {
         // console.log(res)
         this.flightsData = res.data
+        this.total = this.flightsData.flights.length
+        // 结构出缓存数据
+        this.cacheFlightsData = { ...res.data }
         this.dataList = this.flightsData.flights.slice(0, this.pageSize)
         // console.log(this.flightsData)
       })
