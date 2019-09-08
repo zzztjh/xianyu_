@@ -25,6 +25,7 @@
       <!-- 侧边栏 -->
       <div class="aside">
         <!-- 侧边栏组件 -->
+        <FlightsAside />
       </div>
     </el-row>
   </section>
@@ -34,10 +35,11 @@
 import FlightsListHead from '@/components/air/flightsListHead'
 import FlightsItem from '@/components/air/flightsItem.vue'
 import FlightsFilters from '@/components/air/flightsFilters.vue'
+import FlightsAside from '@/components/air/flightsAside.vue'
 
 export default {
   components: {
-    FlightsListHead, FlightsItem, FlightsFilters
+    FlightsListHead, FlightsItem, FlightsFilters, FlightsAside
   },
   data () {
     return {
@@ -61,6 +63,15 @@ export default {
       },
       //   航班分页显示数据
       dataList: []
+    }
+  },
+  // 监听器可以监听当前实例下的所有数据
+  watch: {
+    // 只要路由变化了
+    $route () {
+      // console.log(1)
+      // 重新发送请求获取数据
+      this.getFlightsData()
     }
   },
   mounted () {

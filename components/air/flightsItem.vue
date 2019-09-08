@@ -51,6 +51,7 @@
               <el-button
                 type="warning"
                 size="mini"
+                @click="handleChoose(data.id, item.seat_xid)"
               >
                 选定
               </el-button>
@@ -100,6 +101,15 @@ export default {
     }
   },
   methods: {
+    handleChoose (id, xid) {
+      this.$router.push({
+        path: '/air/order',
+        query: {
+          id,
+          seat_xid: xid
+        }
+      })
+    },
     //   切换显示低价推荐
     handleRec () {
       this.showRecommend = !this.showRecommend

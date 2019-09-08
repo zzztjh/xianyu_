@@ -188,6 +188,11 @@ export default {
         return
       }
       // console.log(this.form)
+      // 获取本地存储
+      const airs = JSON.parse(localStorage.getItem('airs')) || []
+      airs.push(this.form)
+      // 存
+      localStorage.setItem('airs', JSON.stringify(airs))
       this.$router.push({
         path: '/air/flights',
         query: this.form
