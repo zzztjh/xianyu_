@@ -82,7 +82,8 @@ export default {
             this.$message.success('登陆成功，正在跳转')
             setTimeout(() => {
               this.$store.commit('user/setUserInfo', res.data)
-              this.$router.replace('/')
+              // this.$router.replace('/')
+              this.$router.back()
             }, 1000)
           })
         } else {
