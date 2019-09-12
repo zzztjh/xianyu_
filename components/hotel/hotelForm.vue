@@ -21,42 +21,62 @@
       查看价格
     </el-button>
     <div class="content">
-      <el-row :gutter="20">
+      <el-row :gutter="20" type="flex" style="margin-bottom:15px">
         <el-col :span="3">
           <div class="area">
             区域：
           </div>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="12">
           <div class="grid-content bg-purple">
-            <a href="#" class="location-budget active">全部</a>
-            <a v-for="(item, index) in cityList" :key="index" href="#" class="city_area">{{ item.business_area }}</a>
+            <a href="#" class="location-budget active" style="font-size:14px">全部</a>
+            <a v-for="(item, index) in cityList" :key="index" href="#" class="city_area" style="font-size:14px;color:#666">{{ item.business_area }}</a>
           </div>
         </el-col>
       </el-row>
 
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom:15px">
         <el-col :span="3">
           <div class="strategy">
             攻略：
           </div>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="12">
           <div class="grid-content bg-purple">
-            ???
+            <span style="font-size:14px;color:#666">北京，你想要的都能在这找到。博古通今，兼容并蓄，天下一城，如是帝都。 景点以故宫为中心向四处辐射；地铁便宜通畅，而且覆盖绝大多数景点。 由于早上有天安门升旗仪式，所以大多数人选择在天安门附近住宿。</span>
           </div>
         </el-col>
       </el-row>
 
-      <el-row :gutter="20">
-        <el-col :span="3">
+      <el-row :gutter="20" style="margin-bottom:15px">
+        <el-col :span="2">
           <div class="price">
             均价：
           </div>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="12">
           <div class="grid-content bg-purple">
-            ???
+            <el-col :span="6">
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <span style="font-size:14px;color:#666">¥332</span>
+            </el-col>
+            <el-col :span="6">
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <span style="font-size:14px;color:#666">¥521</span>
+            </el-col>
+            <el-col :span="6">
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <i class="iconfont iconhuangguan" style="color:green" />
+              <span style="font-size:14px;color:#666">¥789</span>
+            </el-col>
           </div>
         </el-col>
       </el-row>
