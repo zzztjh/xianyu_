@@ -56,20 +56,20 @@
         </el-col>
         <el-col :span="12">
           <div class="grid-content bg-purple">
-            <el-col :span="6">
+            <el-col :span="8">
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <span style="font-size:14px;color:#666">¥332</span>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <span style="font-size:14px;color:#666">¥521</span>
             </el-col>
-            <el-col :span="6">
+            <el-col :span="8">
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
               <i class="iconfont iconhuangguan" style="color:green" />
